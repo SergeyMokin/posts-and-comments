@@ -8,22 +8,17 @@ namespace PostsAndCommentsTests.TestData
 {
     public class TestDb
     {
-        private static readonly object Lock = new object();
-        private static int _counter;
-        public static PacDbContext GetDbContext()
+        public static PacDbContext GetDbContext(string dbName)
         {
-            lock (Lock)
-            {
-                var options = new DbContextOptionsBuilder<PacDbContext>()
-                    .UseInMemoryDatabase($"TestDB - {++_counter}")
-                    .Options;
+            var options = new DbContextOptionsBuilder<PacDbContext>()
+                .UseInMemoryDatabase(dbName)
+                .Options;
 
-                var context = new PacDbContext(options);
+            var context = new PacDbContext(options);
 
-                InitializeTestData(context);
+            InitializeTestData(context);
 
-                return context;
-            }
+            return context;
         }
 
         private static void InitializeTestData(PacDbContext context)

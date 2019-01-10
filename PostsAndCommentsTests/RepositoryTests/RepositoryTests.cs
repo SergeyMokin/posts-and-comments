@@ -16,7 +16,7 @@ namespace PostsAndCommentsTests.RepositoryTests
 
         public RepositoryTests()
         {
-            _context = TestDb.GetDbContext();
+            _context = TestDb.GetDbContext($"RepositoryTestDb {DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds}");
             _userRepository = new Repository<User>(_context);
         }
         public void Dispose()

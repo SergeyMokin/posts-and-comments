@@ -17,7 +17,7 @@ namespace PostsAndCommentsTests.ServiceTests
 
         public CommentServiceTests()
         {
-            _context = TestDb.GetDbContext();
+            _context = TestDb.GetDbContext($"CommentServiceTestDb {DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds}");
             _commentService = new CommentService(MockInitializer.GetRepository(_context.Comments), MockInitializer.GetAccessor());
         }
 
